@@ -1,14 +1,16 @@
 package com.starwars.feigndemo;
 
-import com.starwars.feigndemo.component.StarWarsApiClient;
+import com.starwars.feigndemo.api.StarWarsApiClient;
 import com.starwars.feigndemo.dto.StarWarsApiCharacterResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+@EnableFeignClients
 @Slf4j
 public class FeignDemoApplication {
 
@@ -17,7 +19,7 @@ public class FeignDemoApplication {
     }
 
     @Bean
-    public CommandLineRunner run(final StarWarsApiClient starWarsApiClient){
+    public CommandLineRunner run(final StarWarsApiClient starWarsApiClient) {
         return args -> {
             if (args.length > 0) {
                 final Integer page = Integer.parseInt(args[0].split("=")[1]);
