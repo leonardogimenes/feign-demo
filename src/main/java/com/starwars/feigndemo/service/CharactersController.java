@@ -1,5 +1,6 @@
 package com.starwars.feigndemo.service;
 
+import com.starwars.feigndemo.annotation.LogExecutionTime;
 import com.starwars.feigndemo.api.StarWarsApiClient;
 import com.starwars.feigndemo.dto.StarWarsApiCharacterResponse;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +20,13 @@ public class CharactersController {
     }
 
     @GetMapping(value = "/people/")
+    @LogExecutionTime
     public StarWarsApiCharacterResponse searchCharacters(@RequestParam(value = "page", required = false) final Integer page){
         return starWarsApiClient.searchForCharacters(page);
     }
 
     @GetMapping(value = "/people/{id}/")
+    @LogExecutionTime
     public StarWarsApiCharacterResponse searchCharacterById(@PathVariable("id") Integer id) {
         return starWarsApiClient.searchForCharacters(id);
     }
